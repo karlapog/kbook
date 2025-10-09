@@ -1,0 +1,360 @@
+﻿<Window x:Class="KBook.GuestDashboardWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="KBook - Guest Portal"
+        Height="800"
+        Width="1200"
+        WindowStartupLocation="CenterScreen"
+        WindowState="Maximized"
+        Background="{StaticResource BackgroundDark}">
+
+    <Window.Resources>
+        <!-- Logout Button Style (Dark Red) -->
+        <Style x:Key="LogoutButton" TargetType="Button">
+            <Setter Property="Background" Value="#8B0000"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Padding" Value="15,8"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            Margin="{TemplateBinding Padding}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#A52A2A"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="#6B0000"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Info Card Style -->
+        <Style x:Key="InfoCard" TargetType="Border">
+            <Setter Property="Background" Value="{StaticResource SurfaceLight}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderGold}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="20"/>
+            <Setter Property="Margin" Value="0,0,0,15"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="0,0,-23,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header Bar -->
+        <Border Grid.Row="0"
+                Background="{StaticResource SurfaceDark}"
+                BorderBrush="{StaticResource GoldAccent}"
+                BorderThickness="0,0,0,3">
+            <Grid Margin="30,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- App Title -->
+                <TextBlock Text="🏨 KBook Guest Portal"
+                          Style="{StaticResource HeaderText}"
+                          VerticalAlignment="Center"
+                          Grid.Column="0"/>
+
+                <!-- Welcome Text -->
+                <StackPanel Grid.Column="1"
+                           VerticalAlignment="Center"
+                           Margin="0,0,20,0">
+                    <TextBlock Text="Welcome,"
+                              Foreground="{StaticResource TextGold}"
+                              FontSize="12"
+                              Opacity="0.8"/>
+                    <TextBlock x:Name="txtWelcomeGuest"
+                              Text="Guest User"
+                              Foreground="{StaticResource GoldAccent}"
+                              FontSize="16"
+                              FontWeight="SemiBold"/>
+                </StackPanel>
+
+                <!-- Logout Button -->
+                <Button x:Name="btnLogout"
+                        Content="Logout"
+                        Grid.Column="2"
+                        Height="40"
+                        Style="{StaticResource LogoutButton}"/>
+            </Grid>
+        </Border>
+
+        <!-- Main Content Area with TabControl -->
+        <TabControl Grid.Row="1"
+                    Margin="20"
+                    x:Name="guestTabControl">
+
+            <!-- Tab 1: My Reservations -->
+            <TabItem Header="My Reservations">
+                <Grid Margin="20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Section Title -->
+                    <TextBlock Text="My Reservations"
+                              Style="{StaticResource SubHeaderText}"
+                              Margin="0,0,0,15"
+                              Grid.Row="0"/>
+
+                    <!-- DataGrid -->
+                    <DataGrid x:Name="dgMyReservations"
+                             Grid.Row="1"
+                             AutoGenerateColumns="False"
+                             CanUserAddRows="False"
+                             SelectionMode="Single"
+                             IsReadOnly="True" HorizontalAlignment="Left" Width="1133">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Reservation ID" Width="150" Binding="{Binding ReservationID}"/>
+                            <DataGridTextColumn Header="Room Number" Width="150" Binding="{Binding RoomNumber}"/>
+                            <DataGridTextColumn Header="Room Type" Width="200" Binding="{Binding RoomType}"/>
+                            <DataGridTextColumn Header="Check-In Date" Width="180" Binding="{Binding CheckInDate}"/>
+                            <DataGridTextColumn Header="Check-Out Date" Width="180" Binding="{Binding CheckOutDate}"/>
+                            <DataGridTextColumn Header="Status" Width="150" Binding="{Binding Status}"/>
+                            <DataGridTextColumn Header="Total Amount" Width="*" Binding="{Binding TotalAmount}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+
+            <!-- Tab 2: Make a Reservation -->
+            <TabItem Header="Make a Reservation">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <Grid Margin="40">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- Section Title -->
+                        <TextBlock Text="Book Your Stay"
+                                  Style="{StaticResource SubHeaderText}"
+                                  Margin="0,0,0,30"
+                                  Grid.Row="0"/>
+
+                        <!-- Reservation Form -->
+                        <Border Grid.Row="1"
+                                Style="{StaticResource InfoCard}"
+                                MaxWidth="700"
+                                HorizontalAlignment="Left">
+                            <StackPanel>
+
+                                <!-- Room Type Selection -->
+                                <TextBlock Text="Room Type"
+                                          Style="{StaticResource LabelText}"/>
+                                <ComboBox x:Name="cmbRoomType"
+                                         Height="40"
+                                         Margin="0,0,0,25">
+                                    <ComboBoxItem Content="Standard Room" IsSelected="True"/>
+                                    <ComboBoxItem Content="Deluxe Room"/>
+                                    <ComboBoxItem Content="Suite"/>
+                                    <ComboBoxItem Content="Presidential Suite"/>
+                                </ComboBox>
+
+                                <!-- Check-In Date -->
+                                <TextBlock Text="Check-In Date"
+                                          Style="{StaticResource LabelText}"/>
+                                <DatePicker x:Name="dpCheckIn"
+                                           Height="40"
+                                           Margin="0,0,0,25"/>
+
+                                <!-- Check-Out Date -->
+                                <TextBlock Text="Check-Out Date"
+                                          Style="{StaticResource LabelText}"/>
+                                <DatePicker x:Name="dpCheckOut"
+                                           Height="40"
+                                           Margin="0,0,0,25"/>
+
+                                <!-- Number of Guests -->
+                                <TextBlock Text="Number of Guests"
+                                          Style="{StaticResource LabelText}"/>
+                                <ComboBox x:Name="cmbNumGuests"
+                                         Height="40"
+                                         Margin="0,0,0,25">
+                                    <ComboBoxItem Content="1" IsSelected="True"/>
+                                    <ComboBoxItem Content="2"/>
+                                    <ComboBoxItem Content="3"/>
+                                    <ComboBoxItem Content="4"/>
+                                </ComboBox>
+
+                                <!-- Special Requests -->
+                                <TextBlock Text="Special Requests (Optional)"
+                                          Style="{StaticResource LabelText}"/>
+                                <TextBox x:Name="txtSpecialRequests"
+                                        Height="80"
+                                        TextWrapping="Wrap"
+                                        AcceptsReturn="True"
+                                        VerticalScrollBarVisibility="Auto"
+                                        Margin="0,0,0,30"/>
+
+                                <!-- Book Now Button -->
+                                <Button x:Name="btnBookNow"
+                                       Content="Book Now"
+                                       Height="50"
+                                       FontSize="16"
+                                       HorizontalAlignment="Stretch"/>
+
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </ScrollViewer>
+            </TabItem>
+
+            <!-- Tab 3: Profile -->
+            <TabItem Header="Profile">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <Grid Margin="40">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- Section Title -->
+                        <TextBlock Text="My Profile"
+                                  Style="{StaticResource SubHeaderText}"
+                                  Margin="0,0,0,30"
+                                  Grid.Row="0"/>
+
+                        <!-- Profile Content -->
+                        <StackPanel Grid.Row="1" MaxWidth="800" HorizontalAlignment="Left">
+
+                            <!-- Guest Information Card -->
+                            <Border Style="{StaticResource InfoCard}">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="180"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <!-- Guest ID -->
+                                    <TextBlock Text="Guest ID:"
+                                              Grid.Row="0" Grid.Column="0"
+                                              Foreground="{StaticResource TextGold}"
+                                              FontWeight="SemiBold"
+                                              Margin="0,0,0,15"/>
+                                    <TextBlock x:Name="txtProfileGuestID"
+                                              Text="G12345"
+                                              Grid.Row="0" Grid.Column="1"
+                                              Margin="0,0,0,15"/>
+
+                                    <!-- First Name -->
+                                    <TextBlock Text="First Name:"
+                                              Grid.Row="1" Grid.Column="0"
+                                              Foreground="{StaticResource TextGold}"
+                                              FontWeight="SemiBold"
+                                              Margin="0,0,0,15"/>
+                                    <TextBlock x:Name="txtProfileFirstName"
+                                              Text="John"
+                                              Grid.Row="1" Grid.Column="1"
+                                              Margin="0,0,0,15"/>
+
+                                    <!-- Last Name -->
+                                    <TextBlock Text="Last Name:"
+                                              Grid.Row="2" Grid.Column="0"
+                                              Foreground="{StaticResource TextGold}"
+                                              FontWeight="SemiBold"
+                                              Margin="0,0,0,15"/>
+                                    <TextBlock x:Name="txtProfileLastName"
+                                              Text="Doe"
+                                              Grid.Row="2" Grid.Column="1"
+                                              Margin="0,0,0,15"/>
+
+                                    <!-- Email -->
+                                    <TextBlock Text="Email:"
+                                              Grid.Row="3" Grid.Column="0"
+                                              Foreground="{StaticResource TextGold}"
+                                              FontWeight="SemiBold"
+                                              Margin="0,0,0,15"/>
+                                    <TextBlock x:Name="txtProfileEmail"
+                                              Text="john.doe@email.com"
+                                              Grid.Row="3" Grid.Column="1"
+                                              Margin="0,0,0,15"/>
+
+                                    <!-- Phone -->
+                                    <TextBlock Text="Phone:"
+                                              Grid.Row="4" Grid.Column="0"
+                                              Foreground="{StaticResource TextGold}"
+                                              FontWeight="SemiBold"
+                                              Margin="0,0,0,15"/>
+                                    <TextBlock x:Name="txtProfilePhone"
+                                              Text="+1 234 567 8900"
+                                              Grid.Row="4" Grid.Column="1"
+                                              Margin="0,0,0,15"/>
+
+                                    <!-- Registration Date -->
+                                    <TextBlock Text="Member Since:"
+                                              Grid.Row="5" Grid.Column="0"
+                                              Foreground="{StaticResource TextGold}"
+                                              FontWeight="SemiBold"/>
+                                    <TextBlock x:Name="txtProfileRegDate"
+                                              Text="January 15, 2025"
+                                              Grid.Row="5" Grid.Column="1"/>
+                                </Grid>
+                            </Border>
+
+                            <!-- Edit Profile Button -->
+                            <Button x:Name="btnEditProfile"
+                                   Content="Edit Profile"
+                                   Width="200"
+                                   Height="45"
+                                   HorizontalAlignment="Left"
+                                   Margin="0,20,0,0"/>
+
+                            <!-- Account Settings Card -->
+                            <Border Style="{StaticResource InfoCard}"
+                                   Margin="0,30,0,0">
+                                <StackPanel>
+                                    <TextBlock Text="Account Settings"
+                                              Foreground="{StaticResource GoldAccent}"
+                                              FontSize="18"
+                                              FontWeight="SemiBold"
+                                              Margin="0,0,0,20"/>
+
+                                    <Button x:Name="btnChangePassword"
+                                           Content="Change Password"
+                                           Width="200"
+                                           Height="40"
+                                           HorizontalAlignment="Left"
+                                           Style="{StaticResource SecondaryButton}"/>
+                                </StackPanel>
+                            </Border>
+
+                        </StackPanel>
+                    </Grid>
+                </ScrollViewer>
+            </TabItem>
+
+        </TabControl>
+    </Grid>
+</Window>
