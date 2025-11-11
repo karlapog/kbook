@@ -1,7 +1,7 @@
-﻿<Window x:Class="KBook.DashboardWindow"
+﻿<Window x:Class="Kbook.DashboardWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="KBook - Hotel Dashboard"
+        Title="Kbook - Hotel Dashboard"
         Height="800"
         Width="1400"
         WindowStartupLocation="CenterScreen"
@@ -62,7 +62,7 @@
                 </Grid.ColumnDefinitions>
 
                 <!-- App Title -->
-                <TextBlock Text="🏨 KBook Dashboard"
+                <TextBlock Text="🏨 Kbook Dashboard"
                           Style="{StaticResource HeaderText}"
                           VerticalAlignment="Center"
                           Grid.Column="0"/>
@@ -107,48 +107,47 @@
 
                     <!-- Section Title -->
                     <TextBlock Text="Reservation Information"
-                              Style="{StaticResource SubHeaderText}"
-                              Margin="0,0,0,15"
-                              Grid.Row="0"/>
+                  Style="{StaticResource SubHeaderText}"
+                  Margin="0,0,0,15"
+                  Grid.Row="0"/>
 
                     <!-- DataGrid -->
                     <DataGrid x:Name="dgReservations"
-                             Grid.Row="1"
-                             AutoGenerateColumns="False"
-                             CanUserAddRows="False"
-                             SelectionMode="Single"
-                             Margin="0,0,0,15">
+                 Grid.Row="1"
+                 AutoGenerateColumns="False"
+                 CanUserAddRows="False"
+                 SelectionMode="Single"
+                 Margin="0,0,0,15">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Reservation ID" Width="120" Binding="{Binding ReservationID}"/>
+                            <DataGridTextColumn Header="Reservation ID" Width="120" Binding="{Binding ReservationId}"/>
                             <DataGridTextColumn Header="Guest Name" Width="200" Binding="{Binding GuestName}"/>
                             <DataGridTextColumn Header="Room Number" Width="120" Binding="{Binding RoomNumber}"/>
-                            <DataGridTextColumn Header="Check-In Date" Width="150" Binding="{Binding CheckInDate}"/>
-                            <DataGridTextColumn Header="Check-Out Date" Width="150" Binding="{Binding CheckOutDate}"/>
-                            <DataGridTextColumn Header="Status" Width="120" Binding="{Binding Status}"/>
-                            <DataGridTextColumn Header="Total Amount" Width="*" Binding="{Binding TotalAmount}"/>
+                            <DataGridTextColumn Header="Check-In" Width="120" Binding="{Binding CheckIn, StringFormat=yyyy-MM-dd}"/>
+                            <DataGridTextColumn Header="Check-Out" Width="120" Binding="{Binding CheckOut, StringFormat=yyyy-MM-dd}"/>
+                            <DataGridTextColumn Header="Status" Width="*" Binding="{Binding Status}"/>
                         </DataGrid.Columns>
                     </DataGrid>
 
                     <!-- Action Buttons -->
                     <StackPanel Grid.Row="2"
-                               Orientation="Horizontal"
-                               HorizontalAlignment="Right">
+                   Orientation="Horizontal"
+                   HorizontalAlignment="Right">
                         <Button x:Name="btnAddReservation"
-                               Content="Add Reservation"
-                               Width="150"
-                               Height="40"
-                               Margin="0,0,10,0"/>
+                   Content="New Reservation"
+                   Width="150"
+                   Height="40"
+                   Margin="0,0,10,0"/>
                         <Button x:Name="btnEditReservation"
-                               Content="Edit"
-                               Width="100"
-                               Height="40"
-                               Margin="0,0,10,0"
-                               Style="{StaticResource SecondaryButton}"/>
-                        <Button x:Name="btnDeleteReservation"
-                               Content="Delete"
-                               Width="100"
-                               Height="40"
-                               Style="{StaticResource SecondaryButton}"/>
+                   Content="Edit"
+                   Width="100"
+                   Height="40"
+                   Margin="0,0,10,0"
+                   Style="{StaticResource SecondaryButton}"/>
+                        <Button x:Name="btnCancelReservation"
+                   Content="Cancel"
+                   Width="100"
+                   Height="40"
+                   Style="{StaticResource SecondaryButton}"/>
                     </StackPanel>
                 </Grid>
             </TabItem>
@@ -163,39 +162,39 @@
                     </Grid.RowDefinitions>
 
                     <TextBlock Text="Guest Check-In"
-                              Style="{StaticResource SubHeaderText}"
-                              Margin="0,0,0,15"
-                              Grid.Row="0"/>
+                  Style="{StaticResource SubHeaderText}"
+                  Margin="0,0,0,15"
+                  Grid.Row="0"/>
 
                     <DataGrid x:Name="dgCheckIn"
-                             Grid.Row="1"
-                             AutoGenerateColumns="False"
-                             CanUserAddRows="False"
-                             SelectionMode="Single"
-                             Margin="0,0,0,15">
+                 Grid.Row="1"
+                 AutoGenerateColumns="False"
+                 CanUserAddRows="False"
+                 SelectionMode="Single"
+                 Margin="0,0,0,15">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Reservation ID" Width="120" Binding="{Binding ReservationID}"/>
-                            <DataGridTextColumn Header="Guest Name" Width="250" Binding="{Binding GuestName}"/>
+                            <DataGridTextColumn Header="Reservation ID" Width="120" Binding="{Binding ReservationId}"/>
+                            <DataGridTextColumn Header="Guest Name" Width="200" Binding="{Binding GuestName}"/>
                             <DataGridTextColumn Header="Room Number" Width="120" Binding="{Binding RoomNumber}"/>
-                            <DataGridTextColumn Header="Check-In Date" Width="150" Binding="{Binding CheckInDate}"/>
-                            <DataGridTextColumn Header="Number of Guests" Width="150" Binding="{Binding NumberOfGuests}"/>
+                            <DataGridTextColumn Header="Check-In Date" Width="150" Binding="{Binding CheckIn, StringFormat=yyyy-MM-dd}"/>
+                            <DataGridTextColumn Header="Check-Out Date" Width="150" Binding="{Binding CheckOut, StringFormat=yyyy-MM-dd}"/>
                             <DataGridTextColumn Header="Status" Width="*" Binding="{Binding Status}"/>
                         </DataGrid.Columns>
                     </DataGrid>
 
                     <StackPanel Grid.Row="2"
-                               Orientation="Horizontal"
-                               HorizontalAlignment="Right">
+                   Orientation="Horizontal"
+                   HorizontalAlignment="Right">
                         <Button x:Name="btnProcessCheckIn"
-                               Content="Process Check-In"
-                               Width="150"
-                               Height="40"
-                               Margin="0,0,10,0"/>
-                        <Button x:Name="btnCancelCheckIn"
-                               Content="Cancel"
-                               Width="100"
-                               Height="40"
-                               Style="{StaticResource SecondaryButton}"/>
+                   Content="Process Check-In"
+                   Width="150"
+                   Height="40"
+                   Margin="0,0,10,0"/>
+                        <Button x:Name="btnRefreshCheckIn"
+                   Content="Refresh"
+                   Width="100"
+                   Height="40"
+                   Style="{StaticResource SecondaryButton}"/>
                     </StackPanel>
                 </Grid>
             </TabItem>
@@ -210,45 +209,39 @@
                     </Grid.RowDefinitions>
 
                     <TextBlock Text="Guest Check-Out"
-                              Style="{StaticResource SubHeaderText}"
-                              Margin="0,0,0,15"
-                              Grid.Row="0"/>
+                  Style="{StaticResource SubHeaderText}"
+                  Margin="0,0,0,15"
+                  Grid.Row="0"/>
 
                     <DataGrid x:Name="dgCheckOut"
-                             Grid.Row="1"
-                             AutoGenerateColumns="False"
-                             CanUserAddRows="False"
-                             SelectionMode="Single"
-                             Margin="0,0,0,15">
+                 Grid.Row="1"
+                 AutoGenerateColumns="False"
+                 CanUserAddRows="False"
+                 SelectionMode="Single"
+                 Margin="0,0,0,15">
                         <DataGrid.Columns>
+                            <DataGridTextColumn Header="Reservation ID" Width="120" Binding="{Binding ReservationId}"/>
+                            <DataGridTextColumn Header="Guest Name" Width="200" Binding="{Binding GuestName}"/>
                             <DataGridTextColumn Header="Room Number" Width="120" Binding="{Binding RoomNumber}"/>
-                            <DataGridTextColumn Header="Guest Name" Width="250" Binding="{Binding GuestName}"/>
-                            <DataGridTextColumn Header="Check-In Date" Width="150" Binding="{Binding CheckInDate}"/>
-                            <DataGridTextColumn Header="Check-Out Date" Width="150" Binding="{Binding CheckOutDate}"/>
-                            <DataGridTextColumn Header="Total Amount" Width="150" Binding="{Binding TotalAmount}"/>
-                            <DataGridTextColumn Header="Payment Status" Width="*" Binding="{Binding PaymentStatus}"/>
+                            <DataGridTextColumn Header="Check-In" Width="120" Binding="{Binding CheckIn, StringFormat=yyyy-MM-dd}"/>
+                            <DataGridTextColumn Header="Check-Out" Width="120" Binding="{Binding CheckOut, StringFormat=yyyy-MM-dd}"/>
+                            <DataGridTextColumn Header="Total Amount" Width="*" Binding="{Binding TotalAmount, StringFormat=₱{0:N2}}"/>
                         </DataGrid.Columns>
                     </DataGrid>
 
                     <StackPanel Grid.Row="2"
-                               Orientation="Horizontal"
-                               HorizontalAlignment="Right">
+                   Orientation="Horizontal"
+                   HorizontalAlignment="Right">
                         <Button x:Name="btnProcessCheckOut"
-                               Content="Process Check-Out"
-                               Width="150"
-                               Height="40"
-                               Margin="0,0,10,0"/>
-                        <Button x:Name="btnViewBill"
-                               Content="View Bill"
-                               Width="100"
-                               Height="40"
-                               Margin="0,0,10,0"
-                               Style="{StaticResource SecondaryButton}"/>
-                        <Button x:Name="btnCancelCheckOut"
-                               Content="Cancel"
-                               Width="100"
-                               Height="40"
-                               Style="{StaticResource SecondaryButton}"/>
+                   Content="Process Check-Out"
+                   Width="150"
+                   Height="40"
+                   Margin="0,0,10,0"/>
+                        <Button x:Name="btnRefreshCheckOut"
+                   Content="Refresh"
+                   Width="100"
+                   Height="40"
+                   Style="{StaticResource SecondaryButton}"/>
                     </StackPanel>
                 </Grid>
             </TabItem>
@@ -263,45 +256,43 @@
                     </Grid.RowDefinitions>
 
                     <TextBlock Text="Guest Management"
-                              Style="{StaticResource SubHeaderText}"
-                              Margin="0,0,0,15"
-                              Grid.Row="0"/>
+                  Style="{StaticResource SubHeaderText}"
+                  Margin="0,0,0,15"
+                  Grid.Row="0"/>
 
                     <DataGrid x:Name="dgGuests"
-                             Grid.Row="1"
-                             AutoGenerateColumns="False"
-                             CanUserAddRows="False"
-                             SelectionMode="Single"
-                             Margin="0,0,0,15">
+                 Grid.Row="1"
+                 AutoGenerateColumns="False"
+                 CanUserAddRows="False"
+                 SelectionMode="Single"
+                 Margin="0,0,0,15">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Guest ID" Width="100" Binding="{Binding GuestID}"/>
-                            <DataGridTextColumn Header="First Name" Width="150" Binding="{Binding FirstName}"/>
-                            <DataGridTextColumn Header="Last Name" Width="150" Binding="{Binding LastName}"/>
-                            <DataGridTextColumn Header="Email" Width="250" Binding="{Binding Email}"/>
-                            <DataGridTextColumn Header="Phone" Width="150" Binding="{Binding Phone}"/>
-                            <DataGridTextColumn Header="Registration Date" Width="*" Binding="{Binding RegistrationDate}"/>
+                            <DataGridTextColumn Header="Guest ID" Width="100" Binding="{Binding GuestId}"/>
+                            <DataGridTextColumn Header="Name" Width="250" Binding="{Binding Name}"/>
+                            <DataGridTextColumn Header="Contact Number" Width="150" Binding="{Binding ContactNumber}"/>
+                            <DataGridTextColumn Header="Email" Width="*" Binding="{Binding Email}"/>
                         </DataGrid.Columns>
                     </DataGrid>
 
                     <StackPanel Grid.Row="2"
-                               Orientation="Horizontal"
-                               HorizontalAlignment="Right">
+                   Orientation="Horizontal"
+                   HorizontalAlignment="Right">
                         <Button x:Name="btnAddGuest"
-                               Content="Add Guest"
-                               Width="120"
-                               Height="40"
-                               Margin="0,0,10,0"/>
+                   Content="Add Guest"
+                   Width="120"
+                   Height="40"
+                   Margin="0,0,10,0"/>
                         <Button x:Name="btnEditGuest"
-                               Content="Edit"
-                               Width="100"
-                               Height="40"
-                               Margin="0,0,10,0"
-                               Style="{StaticResource SecondaryButton}"/>
+                   Content="Edit"
+                   Width="100"
+                   Height="40"
+                   Margin="0,0,10,0"
+                   Style="{StaticResource SecondaryButton}"/>
                         <Button x:Name="btnDeleteGuest"
-                               Content="Delete"
-                               Width="100"
-                               Height="40"
-                               Style="{StaticResource SecondaryButton}"/>
+                   Content="Delete"
+                   Width="100"
+                   Height="40"
+                   Style="{StaticResource SecondaryButton}"/>
                     </StackPanel>
                 </Grid>
             </TabItem>
@@ -316,46 +307,43 @@
                     </Grid.RowDefinitions>
 
                     <TextBlock Text="Room Availability"
-                              Style="{StaticResource SubHeaderText}"
-                              Margin="0,0,0,15"
-                              Grid.Row="0"/>
+                  Style="{StaticResource SubHeaderText}"
+                  Margin="0,0,0,15"
+                  Grid.Row="0"/>
 
                     <DataGrid x:Name="dgRooms"
-                             Grid.Row="1"
-                             AutoGenerateColumns="False"
-                             CanUserAddRows="False"
-                             SelectionMode="Single"
-                             Margin="0,0,0,15">
+                 Grid.Row="1"
+                 AutoGenerateColumns="False"
+                 CanUserAddRows="False"
+                 SelectionMode="Single"
+                 Margin="0,0,0,15">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Room Number" Width="120" Binding="{Binding RoomNumber}"/>
-                            <DataGridTextColumn Header="Room Type" Width="150" Binding="{Binding RoomType}"/>
-                            <DataGridTextColumn Header="Floor" Width="100" Binding="{Binding Floor}"/>
-                            <DataGridTextColumn Header="Capacity" Width="100" Binding="{Binding Capacity}"/>
-                            <DataGridTextColumn Header="Price per Night" Width="150" Binding="{Binding PricePerNight}"/>
+                            <DataGridTextColumn Header="Room Type" Width="150" Binding="{Binding Type}"/>
                             <DataGridTextColumn Header="Status" Width="120" Binding="{Binding Status}"/>
-                            <DataGridTextColumn Header="Features" Width="*" Binding="{Binding Features}"/>
+                            <DataGridTextColumn Header="Price per Night" Width="*" Binding="{Binding Price, StringFormat=₱{0:N2}}"/>
                         </DataGrid.Columns>
                     </DataGrid>
 
                     <StackPanel Grid.Row="2"
-                               Orientation="Horizontal"
-                               HorizontalAlignment="Right">
+                   Orientation="Horizontal"
+                   HorizontalAlignment="Right">
                         <Button x:Name="btnAddRoom"
-                               Content="Add Room"
-                               Width="120"
-                               Height="40"
-                               Margin="0,0,10,0"/>
+                   Content="Add Room"
+                   Width="120"
+                   Height="40"
+                   Margin="0,0,10,0"/>
                         <Button x:Name="btnEditRoom"
-                               Content="Edit"
-                               Width="100"
-                               Height="40"
-                               Margin="0,0,10,0"
-                               Style="{StaticResource SecondaryButton}"/>
+                   Content="Edit"
+                   Width="100"
+                   Height="40"
+                   Margin="0,0,10,0"
+                   Style="{StaticResource SecondaryButton}"/>
                         <Button x:Name="btnDeleteRoom"
-                               Content="Delete"
-                               Width="100"
-                               Height="40"
-                               Style="{StaticResource SecondaryButton}"/>
+                   Content="Delete"
+                   Width="100"
+                   Height="40"
+                   Style="{StaticResource SecondaryButton}"/>
                     </StackPanel>
                 </Grid>
             </TabItem>

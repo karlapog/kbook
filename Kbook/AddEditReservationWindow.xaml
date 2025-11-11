@@ -1,0 +1,158 @@
+﻿<Window x:Class="Kbook.AddEditReservationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Reservation"
+        Height="788"
+        Width="550"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        Background="{StaticResource BackgroundDark}">
+
+    <Window.Resources>
+        <!-- Calendar Style with DARK background and WHITE text -->
+        <Style x:Key="DarkCalendarStyle" TargetType="Calendar">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="#1E1E1E"/>
+            <Style.Resources>
+                <Style TargetType="CalendarDayButton">
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="Background" Value="#2D2D2D"/>
+                </Style>
+                <Style TargetType="CalendarButton">
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="Background" Value="#2D2D2D"/>
+                </Style>
+            </Style.Resources>
+        </Style>
+
+        <!-- Dark ComboBox Item Style -->
+        <Style x:Key="DarkComboBoxItem" TargetType="ComboBoxItem">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="#2D2D2D"/>
+            <Style.Triggers>
+                <Trigger Property="IsHighlighted" Value="True">
+                    <Setter Property="Background" Value="{StaticResource GoldAccent}"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                </Trigger>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="{StaticResource GoldAccent}"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <Grid Height="772" VerticalAlignment="Top">
+        <Border Background="{StaticResource SurfaceDark}"
+                BorderBrush="{StaticResource BorderGold}"
+                BorderThickness="2"
+                CornerRadius="10"
+                Margin="20,20,20,10">
+
+            <StackPanel Margin="30"
+                        VerticalAlignment="Center">
+
+                <!-- Title -->
+                <TextBlock x:Name="txtTitle"
+                          Text="New Reservation"
+                          Style="{StaticResource SubHeaderText}"
+                          HorizontalAlignment="Center"
+                          Margin="0,0,0,30"/>
+
+                <!-- Guest Selection -->
+                <TextBlock Text="Select Guest *"
+                          Style="{StaticResource LabelText}"/>
+                <ComboBox x:Name="cmbGuest"
+                         Height="40"
+                         Margin="0,0,0,20"
+                         Foreground="White"
+                         DisplayMemberPath="Name"
+                         SelectedValuePath="GuestId"
+                         ItemContainerStyle="{StaticResource DarkComboBoxItem}">
+                </ComboBox>
+
+                <!-- Room Selection -->
+                <TextBlock Text="Select Room *"
+                          Style="{StaticResource LabelText}"/>
+                <ComboBox x:Name="cmbRoom"
+                         Height="40"
+                         Margin="0,0,0,20"
+                         Foreground="White"
+                         SelectionChanged="CmbRoom_SelectionChanged"
+                         ItemContainerStyle="{StaticResource DarkComboBoxItem}">
+                </ComboBox>
+
+                <!-- Check-In Date -->
+                <TextBlock Text="Check-In Date *"
+                          Style="{StaticResource LabelText}"/>
+                <DatePicker x:Name="dpCheckIn"
+                           Height="40"
+                           Margin="0,0,0,20"
+                           CalendarStyle="{StaticResource DarkCalendarStyle}"
+                           SelectedDateChanged="DatePicker_SelectedDateChanged"/>
+
+                <!-- Check-Out Date -->
+                <TextBlock Text="Check-Out Date *"
+                          Style="{StaticResource LabelText}"/>
+                <DatePicker x:Name="dpCheckOut"
+                           Height="40"
+                           Margin="0,0,0,20"
+                           CalendarStyle="{StaticResource DarkCalendarStyle}"
+                           SelectedDateChanged="DatePicker_SelectedDateChanged"/>
+
+                <!-- Price per Night (Read-Only) -->
+                <TextBlock Text="Price per Night (₱)"
+                          Style="{StaticResource LabelText}"/>
+                <TextBox x:Name="txtPricePerNight"
+                        Height="40"
+                        Margin="0,0,0,20"
+                        IsReadOnly="True"
+                        Background="{StaticResource SurfaceLight}"
+                        Opacity="0.7"/>
+
+                <!-- Total Nights (Read-Only) -->
+                <TextBlock Text="Total Nights"
+                          Style="{StaticResource LabelText}"/>
+                <TextBox x:Name="txtTotalNights"
+                        Height="40"
+                        Margin="0,0,0,20"
+                        IsReadOnly="True"
+                        Background="{StaticResource SurfaceLight}"
+                        Opacity="0.7"/>
+
+                <!-- Total Amount (Read-Only) -->
+                <TextBlock Text="Total Amount (₱)"
+                          Style="{StaticResource LabelText}"/>
+                <TextBox x:Name="txtTotalAmount"
+                        Height="40"
+                        Margin="0,0,0,30"
+                        IsReadOnly="True"
+                        Background="{StaticResource SurfaceLight}"
+                        Opacity="0.7"
+                        FontWeight="Bold"
+                        FontSize="16"/>
+
+                <!-- Buttons -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button x:Name="btnSave"
+                            Content="Book Now"
+                            Grid.Column="0"
+                            Height="45"/>
+
+                    <Button x:Name="btnCancel"
+                            Content="Cancel"
+                            Grid.Column="2"
+                            Height="45"
+                            Style="{StaticResource SecondaryButton}"/>
+                </Grid>
+
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
